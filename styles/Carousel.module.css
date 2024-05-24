@@ -1,0 +1,14 @@
+.indicators {
+  top: -24px;
+}
+
+.indicator {
+  background-color: rgba(0, 0, 0, 0.3);
+  width: 10px;
+  transition: width 250ms ease;
+
+  &[data-active] {
+    width: 20px;
+    background-color: blue;
+  }
+}
