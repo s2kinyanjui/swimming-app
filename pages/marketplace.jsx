@@ -102,7 +102,7 @@ const Selection = ({ onViewUpdate }) => {
           </div>
         </div>
       </div>
-      <div className="space-x-2">
+      <div className="space-x-2 flex">
         <Pill withRemoveButton>Free shipping</Pill>
         <Pill withRemoveButton>Swimming Costumes</Pill>
       </div>
