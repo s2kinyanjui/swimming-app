@@ -7,6 +7,7 @@ import {
   IconShoppingBag,
 } from "@tabler/icons-react";
 import Hamburger from "hamburger-react";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 
 function Header() {
@@ -77,9 +78,12 @@ function Header() {
 export default Header;
 
 const DrawerItem = ({ item }) => {
-  console.log(item);
+  const router = useRouter();
+
   return (
-    <div className="py-3 flex w-full space-x-4">
+    <div
+      onClick={() => router.push(item?.goTo)}
+      className="py-3 flex w-full space-x-4">
       {item?.icon}
       <Text>{item?.label}</Text>
     </div>
