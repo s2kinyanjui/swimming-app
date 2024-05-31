@@ -1,0 +1,16 @@
+.root {
+  outline: 2px solid black;
+  outline-offset: 2px;
+}
+
+.trackLabel {
+  margin-right: 8px;
+}
+
+.track {
+  padding-left: 8px;
+}
+
+.thumb {
+  background: #000;
+}
