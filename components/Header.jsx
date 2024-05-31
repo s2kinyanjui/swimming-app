@@ -1,14 +1,19 @@
 import { Avatar, Button, Divider, Drawer, Text } from "@mantine/core";
 import {
+  IconBrandInstagram,
   IconBuildingCommunity,
+  IconCalendar,
   IconEdit,
   IconLogout,
   IconLogout2,
+  IconNews,
+  IconRss,
   IconShoppingBag,
 } from "@tabler/icons-react";
 import Hamburger from "hamburger-react";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
+import Footer from "./Footer";
 
 function Header() {
   const [isOpen, setOpen] = useState(false);
@@ -22,30 +27,7 @@ function Header() {
         opened={isOpen}
         onClose={() => setOpen(false)}
         title={null}>
-        <div className="p-3">
-          <div>
-            <div className="flex space-x-4">
-              <Avatar radius={"sm"} color="blue" size={56}>
-                SK
-              </Avatar>
-              <div className="mt-1">
-                <Text fw={"bolder"}>Steve Kinuthia</Text>
-                <Text c="dimmmed" size="xs">
-                  s2kinyanjui@gmail.com
-                </Text>
-              </div>
-            </div>
-            <br />
-            <Button
-              fullWidth
-              variant="light"
-              size="xs"
-              leftSection={<IconEdit size={14} />}>
-              Edit profile
-            </Button>
-          </div>
-          <br />
-
+        <div className="p-3 relative">
           <div className="space-y-3 mt-8">
             {[
               {
@@ -57,6 +39,16 @@ function Header() {
                 label: "Community",
                 icon: <IconBuildingCommunity />,
                 goTo: "/community",
+              },
+              {
+                label: "Events calendar",
+                icon: <IconCalendar />,
+                goTo: "/calendar",
+              },
+              {
+                label: "News & Blogs",
+                icon: <IconNews />,
+                goTo: "/news",
               },
             ].map((item) => (
               <DrawerItem item={item} />
@@ -70,7 +62,15 @@ function Header() {
             <Text c={"red"}>Log out</Text>
           </div>
         </div>
+
+        <div className=" absolute bottom-4 w-4/5">
+          <Footer />
+        </div>
       </Drawer>
+
+      <Avatar style={{ margin: 12 }} color="red" radius={"md"} size={48}>
+        SK
+      </Avatar>
     </div>
   );
 }

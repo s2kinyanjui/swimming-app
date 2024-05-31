@@ -53,9 +53,9 @@ function CartItem() {
           onClick={openProduct}
           src="/product.png"
           alt="product"
-          className="w-[80px] object-contain"
+          className="w-[100px] object-contain"
         />
-        <div className="mt-2 flex-1 space-y-[6px] relative mb-2">
+        <div className="mt-2 flex-1 space-y-3 relative mb-2">
           <Button
             w={24}
             h={24}
@@ -74,10 +74,10 @@ function CartItem() {
             className={`flex space-x-2 overflow-x-scroll  max-w-[calc(${width} - 200px)`}>
             {["XS", "S", "M", "L"].map((size) => (
               <Button
-                h={24}
-                w={24}
+                h={28}
+                w={28}
                 p={0}
-                radius={24}
+                radius={28}
                 onClick={() => handleOnClickSize(size)}
                 color="dark"
                 variant={size == selection?.size ? "filled" : "outline"}>
@@ -88,10 +88,10 @@ function CartItem() {
           <div className="flex space-x-2">
             {["red", "blue", "purple", "yellow"].map((color) => (
               <Button
-                h={24}
-                w={24}
+                h={28}
+                w={28}
                 p={0}
-                radius={24}
+                radius={28}
                 onClick={() => handleOnClickColor(color)}
                 color={color}
                 variant="filled"

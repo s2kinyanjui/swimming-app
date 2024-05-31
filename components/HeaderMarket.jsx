@@ -73,7 +73,7 @@ const HeaderMarket = () => {
             Checkout
           </Title>
         }>
-        <div className="space-y-3 pb-[100px]">
+        <div className="space-y-3 ">
           <Stepper
             orientation="vertical"
             active={active}
@@ -85,9 +85,9 @@ const HeaderMarket = () => {
             <Stepper.Step label="Payment" description={<PaymentCart />} />
           </Stepper>
         </div>
-
+        <br />
         <Button fullWidth className="">
-          Pay now
+          Complete payment
         </Button>
       </Drawer>
     </div>

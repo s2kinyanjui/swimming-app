@@ -3,6 +3,7 @@ import {
   Badge,
   Button,
   Card,
+  Divider,
   Menu,
   Modal,
   Progress,
@@ -13,9 +14,12 @@ import {
 import React, { useState } from "react";
 import classes from "../styles/Accordion.module.css";
 import {
+  IconCheck,
+  IconChecklist,
   IconChevronDown,
   IconChevronLeft,
   IconChevronRight,
+  IconClock,
   IconEdit,
   IconInfoCircle,
   IconTrash,
@@ -74,35 +78,40 @@ const SetList = () => {
           focus: ["Endurance"],
           equipment: null,
           count: 1,
-          timeLimit: null,
+          timeLimit: "30m",
           pace: "Moderate",
+          done: true,
           description:
             "Swim continuously for 1000 meters at a moderate pace to build endurance.",
         },
         {
           name: "Speed Intervals",
           distance: "50m",
-          count: 1,
+          count: 6,
           focus: ["Speed"],
           equipment: ["Swim fins"],
           timeLimit: null,
           pace: "Sprint",
+          done: true,
           description:
             "Perform 6 repetitions of 50 meters each at a sprint pace with swim fins for maximum speed.",
         },
         {
-          name: "Technique Refinement",
-          distance: "500m",
+          name: "Kicks",
+          distance: "100m",
+          count: 5,
           focus: ["Technique"],
           equipment: ["Kickboard"],
           timeLimit: null,
           pace: "Moderate",
+          done: true,
           description:
             "Swim 500 meters using a kickboard focusing on refining swimming technique.",
         },
         {
           name: "Breathing Control",
-          distance: "400m",
+          distance: "100m",
+          count: 4,
           focus: ["Breathing"],
           equipment: ["Pull buoy"],
           timeLimit: null,
@@ -112,54 +121,14 @@ const SetList = () => {
         },
         {
           name: "Pyramid Drill #1",
-          distance: "50m",
+          distance: "50m , 100m , 200m",
+          count: 1,
           focus: ["Endurance", "Speed"],
           equipment: null,
           timeLimit: null,
           pace: "Moderate",
           description:
-            "Swim varying distances in a pyramid pattern: 50m, 100m, 150m, 200m, 150m, 100m, 50m. Increase pace as the distance decreases.",
-        },
-        {
-          name: "Kicking Power",
-          distance: "300m",
-          focus: ["Kicks"],
-          equipment: ["Kickboard"],
-          timeLimit: "None",
-          pace: "Moderate to Fast",
-          description:
-            "Swim 300 meters using a kickboard to focus on kicking power. Gradually increase speed from moderate to fast.",
-        },
-        {
-          name: "Pulling Strength",
-          distance: "600m",
-          focus: ["Pulls"],
-          equipment: ["Pull buoy", "Paddles"],
-          timeLimit: null,
-          pace: "Moderate",
-          description:
-            "Swim 600 meters using a pull buoy and paddles to strengthen the pulling motion of the arms.",
-        },
-        {
-          name: "Interval Training",
-          distance: "100m",
-          count: 10,
-          focus: ["Endurance", "Speed"],
-          equipment: null,
-          timeLimit: null,
-          pace: "Alternate moderate and fast",
-          description:
-            "Perform 10 repetitions of 100 meters each. Alternate between moderate and fast pace to improve endurance and speed.",
-        },
-        {
-          name: "Breath Control Drill",
-          distance: "200m",
-          focus: ["Breathing", "Technique"],
-          equipment: null,
-          timeLimit: null,
-          pace: "Slow and Controlled",
-          description:
-            "Swim 200 meters focusing on slow and controlled breathing. Pay attention to proper technique throughout the drill.",
+            "Swim varying distances in a pyramid pattern: 50m, 100m, 200m, 100m, 50m. Increase pace as the distance decreases.",
         },
       ],
     },
@@ -179,9 +148,13 @@ const SetList = () => {
 
   const items = sections.map((section) => (
     <Accordion.Item key={section.id} value={section?.key}>
-      <Accordion.Control>{section.name}</Accordion.Control>
+      <Accordion.Control>
+        <Text fw="bold" style={{ color: "gray" }}>
+          {section.name.toUpperCase()}
+        </Text>
+      </Accordion.Control>
       <Accordion.Panel>
-        <div className="space-y-1">
+        <div className="space-y-2">
           {section.sets.map((set, i) => (
             <Set set={set} count={i + 1} />
           ))}
@@ -204,11 +177,13 @@ const SetList = () => {
 
       <br />
       <div className="flex justify-center space-x-3">
-        <Button onClick={handleStartWorkout}>Start workout</Button>
+        <Button fullWidth size="lg" onClick={handleStartWorkout}>
+          Start workout
+        </Button>
 
         <Menu shadow="md">
           <Menu.Target>
-            <Button variant="light" h={32} w={32} p={0}>
+            <Button variant="light" h={48} w={48} p={0}>
               <IconChevronDown size={16} />
             </Button>
           </Menu.Target>
@@ -223,6 +198,7 @@ const SetList = () => {
           </Menu.Dropdown>
         </Menu>
       </div>
+      <br />
 
       <Modal
         withCloseButton={false}
@@ -266,6 +242,7 @@ const SetList = () => {
               {sections[0]?.sets[current]?.focus.map((el) => (
                 <Badge
                   radius={"xs"}
+                  classNames={{ root: classes.badgeRoot }}
                   color={
                     el == "Speed"
                       ? "purple"
@@ -278,9 +255,7 @@ const SetList = () => {
                       : el == "Pulls"
                       ? "magenta"
                       : el == "Breathing" && "green"
-                  }>
-                  {el}
-                </Badge>
+                  }></Badge>
               ))}
             </div>
           </div>
@@ -386,10 +361,63 @@ const WorkoutStats = () => {
   );
 };
 
-const Set = ({ set, count }) => {
+const Set = ({ set }) => {
   return (
-    <p>
-      {count}. {set?.name}
-    </p>
+    <>
+      <div className="w-full flex justify-between">
+        <div className="flex space-x-3">
+          <div className="flex space-x-1 mt-3">
+            {set?.focus?.map((el) => (
+              <Badge
+                radius={32}
+                color={
+                  el == "Speed"
+                    ? "purple"
+                    : el == "Endurance"
+                    ? "yellow"
+                    : el == "Technique"
+                    ? "orange"
+                    : el == "Kicks"
+                    ? "cyan"
+                    : el == "Pulls"
+                    ? "magenta"
+                    : el == "Breathing" && "green"
+                }></Badge>
+            ))}
+          </div>
+
+          <div>
+            <p className="font-medium h-[20px]">
+              {set?.count} x {set?.distance}
+            </p>
+            <p className="text-gray-500 text-[0.9rem]">{set?.name}</p>
+          </div>
+        </div>
+
+        <div className="flex space-x-2">
+          {set?.timeLimit && (
+            <Button
+              color="gray"
+              style={{ padding: 0 }}
+              leftSection={<IconClock size={16} />}
+              variant="subtle">
+              {set?.timeLimit}
+            </Button>
+          )}
+          {set?.done && (
+            <Button
+              color="green"
+              style={{ marginTop: 6 }}
+              radius={24}
+              w={24}
+              h={24}
+              p={0}>
+              <IconCheck size={16} />
+            </Button>
+          )}
+        </div>
+      </div>
+      <Divider />
+    </>
   );
 };

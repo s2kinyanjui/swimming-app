@@ -7,7 +7,7 @@ const Cart = () => {
   const { width } = useViewportSize();
 
   return (
-    <div className={`space-y-3 p-4 w-[calc(${width}px-75px)]`}>
+    <div className={`space-y-3 p-4  flex-1 min-w-[calc(${width}px-75px)]`}>
       {[1, 2, 3, 4, 5].map((el) => (
         <CartItem />
       ))}

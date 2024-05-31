@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@babel/preset-react": "^7.24.1",
+    "@ducanh2912/next-pwa": "^10.2.7",
     "@fullcalendar/core": "^6.1.11",
     "@fullcalendar/daygrid": "^6.1.11",
     "@fullcalendar/interaction": "^6.1.11",
